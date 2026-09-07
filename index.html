@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>π Lab — Predictive Imaging Lab, University of Greenwich</title>
+<meta name="description" content="The Predictive Imaging Lab decodes biological tissues and bio-inspired materials with in-situ X-ray microscopy, full-field measurement, artificial intelligence and quantum insight. University of Greenwich.">
+<link rel="canonical" href="https://predictiveimaginglab.com/">
+<meta property="og:title" content="π Lab — Predictive Imaging Lab">
+<meta property="og:description" content="We measure what happens inside. Imaging, mechanics and machine learning at the University of Greenwich.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://predictiveimaginglab.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230E6E76'/><text x='16' y='24' font-size='21' font-family='Georgia,serif' font-style='italic' text-anchor='middle' fill='%23E9EDEA'>π</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <a class="mark" href="index.html">
+      <span class="mark-glyph" aria-hidden="true">π</span>
+      <span class="mark-name">π <span>Lab</span></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="research.html">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="facility.html">Facility</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="news.html">News</a>
+      <a href="join.html">Join</a>
+    </nav>
+    <button class="themebtn" id="theme" type="button">Theme</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="panel">
+    <canvas id="tomo" aria-label="A tomographic slice through a porous structure, sweeping between raw X-ray greyscale and a predicted strain field" role="img"></canvas>
+    <div class="scrim"></div>
+    <div class="wrap hero-wrap">
+      <div class="hero-copy">
+        <p class="eyebrow mono">Predictive Imaging Lab &nbsp;&middot;&nbsp; School of Engineering &nbsp;&middot;&nbsp; University of Greenwich</p>
+        <h1>We measure what happens <em>inside.</em></h1>
+        <p class="lede">Decoding biological tissues and bio&#8209;inspired materials with in&#8209;situ X-ray microscopy, full-field measurement, artificial intelligence and quantum insight.</p>
+        <div class="cta-row">
+          <a class="btn btn-a" href="research.html">Explore the research</a>
+          <a class="btn btn-b" href="join.html">Work with us</a>
+        </div>
+      </div>
+    </div>
+    <div class="hud">
+      <div class="wrap hud-in mono">
+        <span><i class="dot" style="background:#C9D3D0"></i>XCT greyscale</span>
+        <span><i class="dot" style="background:#E08A45"></i>D2IM predicted strain &epsilon;</span>
+        <span class="z" id="zread">z 0428 / 1024</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="thesis">
+  <div class="wrap grid">
+    <div class="rail">
+      <span class="kicker mono">The work</span>
+      <p>Bone, soft tissue, bio-composites and self-assembled biomaterials — imaged under load, then modelled.</p>
+    </div>
+    <div class="thesis-cols">
+      <p class="statement">A tomogram is a measurement, not a picture. We build the models that read it.</p>
+      <div>
+        <p class="sub">The Predictive Imaging Lab is led by Gianluca Tozzi, Professor of Industrial Engineering at the University of Greenwich. Its research runs under <b>Bio&#8209;AImagiQ</b> — Bio-Inspired Engineering with Imaging-based AI and Quantum data — an open initiative that brings together members of the lab and affiliated researchers across the Faculty and beyond.</p>
+        <p class="sub">The group advances the understanding of biological tissues and biomaterials by integrating advanced imaging (in&#8209;situ X-ray tomography, hyperspectral imaging) with full-field measurement such as digital volume correlation, and with artificial intelligence.</p>
+        <p class="sub">The result is a pipeline that runs from the specimen on the loading rig to a trained model that predicts how a structure deforms, where a defect sits, or which formulation will assemble.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid">
+    <div class="rail">
+      <span class="kicker mono">Models</span>
+      <h2>Published architectures</h2>
+      <p>Named models from the lab, with the papers behind them.</p>
+    </div>
+    <div>
+      <div class="models rv">
+        <article class="model">
+          <div class="model-name">D2IM<span class="tag mono">Deformation from greyscale</span></div>
+          <p>Predicts bone deformation directly from X-ray tomography greyscale, without an explicit correlation step.</p>
+          <a class="doi mono" href="https://doi.org/10.1016/j.eml.2024.102202"><span class="venue">Extreme Mechanics Letters</span>10.1016/j.eml.2024.102202</a>
+        </article>
+        <article class="model">
+          <div class="model-name">DiffSpectralNet<span class="tag mono">Diffusion + HSI</span></div>
+          <p>Improves classification accuracy in hyperspectral imaging using a diffusion-based representation.</p>
+          <a class="doi mono" href="https://doi.org/10.1038/s41598-024-58125-4"><span class="venue">Scientific Reports</span>10.1038/s41598-024-58125-4</a>
+        </article>
+        <article class="model">
+          <div class="model-name">MedDiffHSI<span class="tag mono">Tumour detection</span></div>
+          <p>Improves tumour detection from hyperspectral images of biological tissue.</p>
+          <a class="doi mono" href="https://doi.org/10.1111/jmi.13372"><span class="venue">Journal of Microscopy</span>10.1111/jmi.13372</a>
+        </article>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-light" href="publications.html">All publications</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid">
+    <div class="rail">
+      <span class="kicker mono">Active projects</span>
+      <h2>What is running now</h2>
+      <p>Six programmes, each led by a member or affiliate of the lab.</p>
+    </div>
+    <div>
+      <div class="projects rv">
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="1"></canvas></div>
+          <div class="proj-body">
+            <h3>Imaging-based AI models for tissue mechanics</h3>
+            <p>Fully developing D2IM by integrating additional AI strategies, advanced XCT segmentation models and the power of large language models.</p>
+            <div class="lead mono"><span>Lead</span><b>Jon Valijonov</b></div>
+          </div>
+        </article>
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="2"></canvas></div>
+          <div class="proj-body">
+            <h3>AI models for advanced biomaterial design</h3>
+            <p>Applying advanced AI models to analyse, predict and optimise the hierarchical self-assembly of nanoparticles into macroscale soft biomaterials.</p>
+            <div class="lead mono"><span>Lead</span><b>Moeen Mohammady</b></div>
+          </div>
+        </article>
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="3"></canvas></div>
+          <div class="proj-body">
+            <h3>Hyperspectral imaging and AI for biological tissues</h3>
+            <p>Exploring the unique spectral signature of biological tissues and developing advanced AI models for healthcare.</p>
+            <div class="lead mono"><span>Lead</span><b>Neetu Sigger</b></div>
+          </div>
+        </article>
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="4"></canvas></div>
+          <div class="proj-body">
+            <h3>Imaging-based AI models for bio-composites</h3>
+            <p>Developing D2IM-based tools that give the industrial partner a technology to identify the nature of defects in bio-composites and inform manufacturing.</p>
+            <div class="lead mono"><span>KTP-10108115</span><b>Pinelopi Almpantaki</b></div>
+          </div>
+        </article>
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="5"></canvas></div>
+          <div class="proj-body">
+            <h3>Quantum-AI synergy for next-generation imaging</h3>
+            <p>Developing quantum-native representations of biological tissue images, enabling efficient classification, segmentation, measurement and multimodal fusion.</p>
+            <div class="lead mono"><span>Lead</span><b>Isabella Florez</b></div>
+          </div>
+        </article>
+        <article class="proj">
+          <div class="proj-img"><canvas class="tile" data-seed="6"></canvas></div>
+          <div class="proj-body">
+            <h3>Multi-dimensional sonification of bone XCT images</h3>
+            <p>A cross-faculty collaboration investigating AI sonification to design and optimise bone biomimetic materials, blending imaging, computational modelling and additive manufacturing.</p>
+            <div class="lead mono"><span>Collaboration</span><b>Engineering &amp; Science</b></div>
+          </div>
+        </article>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-light" href="projects.html">Project details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid">
+    <div class="rail">
+      <span class="kicker mono">Facility</span>
+      <h2>The imaging bay</h2>
+      <p>Faculty of Engineering and Science, University of Greenwich.</p>
+    </div>
+    <div>
+      <div class="instruments rv">
+        <article class="inst">
+          <div>
+            <h3>InCiTe 3D X-ray Microscope</h3>
+            <p class="vendor mono">KA Imaging</p>
+            <p>Sub-micron resolution with fast phase-contrast acquisition, paired with a custom-designed in&#8209;situ loading device so specimens can be imaged while they deform.</p>
+            <span class="flag mono">First and only of its kind in Europe</span>
+          </div>
+          <div class="specs mono">
+            <div class="spec"><b>Resolution</b><span>&lt; 1 µm</span></div>
+            <div class="spec"><b>Contrast</b><span>Phase + absorption</span></div>
+            <div class="spec"><b>In situ</b><span>Custom loading rig</span></div>
+          </div>
+        </article>
+        <article class="inst">
+          <div>
+            <h3>Hyperspectral Imaging</h3>
+            <p class="vendor mono">Living Optics</p>
+            <p>Spectral signatures that reveal the biochemical state of tissue alongside its structure — the input to our HSI classification and tumour-detection models.</p>
+          </div>
+          <div class="specs mono">
+            <div class="spec"><b>Signal</b><span>Spectral cube</span></div>
+            <div class="spec"><b>Reads</b><span>Biochemical state</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-light" href="facility.html">All instruments</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid">
+    <div class="rail">
+      <span class="kicker mono">News &amp; opportunities</span>
+      <h2>Latest</h2>
+    </div>
+    <div>
+      <div class="notice rv">
+        <p class="mono" style="color:var(--ink-3);margin-bottom:12px">Call for papers &middot; Journal of Microscopy</p>
+        <h3>Special issue: AI in Imaging</h3>
+        <p>The Journal of Microscopy is running a special issue on AI in imaging, guest edited by Peter Soar, Tuan Nguyen and Gianluca Tozzi at the University of Greenwich. Reviews, Methods and Protocols, and primary research articles are all welcome.</p>
+        <div class="meta mono">
+          <span>Deadline extended <b>31 December 2025</b></span>
+          <span>Guest editors &middot; Soar, Nguyen, Tozzi</span>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-light" href="news.html">All news</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:clamp(56px,8vw,104px)">
+  <div class="join">
+    <h2>Curious about what is inside?</h2>
+    <p>We take on PhD researchers, postdocs and industrial partners working at the intersection of imaging, mechanics and machine learning. Bring a specimen, a dataset or a question.</p>
+    <div class="cta-row">
+      <a class="btn btn-a" href="join.html">Join the lab</a>
+      <a class="btn btn-b" href="projects.html">See open projects</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a class="mark" href="index.html">
+          <span class="mark-glyph" aria-hidden="true">π</span>
+          <span class="mark-name">π <span>Lab</span></span>
+        </a>
+        <p>Predictive Imaging Lab &middot; School of Engineering, Faculty of Engineering and Science, University of Greenwich. Research initiative: Bio&#8209;AImagiQ.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Research</h4>
+        <a href="research.html">Research themes</a>
+        <a href="projects.html">Projects</a>
+        <a href="publications.html">Publications</a>
+        <a href="facility.html">Facility</a>
+      </div>
+      <div class="foot-col">
+        <h4>Lab</h4>
+        <a href="people.html">People</a>
+        <a href="news.html">News</a>
+        <a href="join.html">Join</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Predictive Imaging Lab &middot; University of Greenwich</span>
+      <span class="mono">predictiveimaginglab.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/tomo.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
