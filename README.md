@@ -82,7 +82,7 @@ DNS records to add at the registrar:
 | A | `@` | `185.199.109.153` |
 | A | `@` | `185.199.110.153` |
 | A | `@` | `185.199.111.153` |
-| CNAME | `www` | `<github-username>.github.io` |
+| CNAME | `www` | `khislatjon.github.io` |
 
 Then enable **Enforce HTTPS** in the repository's Pages settings once the
 certificate is issued.
