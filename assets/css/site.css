@@ -511,6 +511,77 @@ footer{border-top:1px solid var(--line);background:var(--bench-2);padding:59.8px
 @media (max-width:480px){
   .people{grid-template-columns:repeat(2,1fr);gap:18.4px}
 }
+/* ------------------------------------------------------- mobile drawer -- */
+/* The six links stop fitting one row at 500px, and .topbar is sticky, so a
+   wrapped nav would hold roughly a seventh of a phone screen for the whole
+   scroll. Below 560px they move into an off-canvas panel instead. The button
+   needs site.js, so if that never runs the footer carries a full set of links
+   as the fallback. Breakpoint is mirrored by DRAWER_MAX in site.js. */
+.navbtn{display:none}
+.navscrim{display:none}
+
+@media (max-width:560px){
+  .navbtn{
+    display:grid;place-items:center;
+    border:1px solid var(--line);background:transparent;color:var(--ink-2);
+    border-radius:var(--r);width:34.5px;height:34.5px;padding:0;cursor:pointer;
+  }
+  .navbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+  /* Bars and cross share one grid cell and cross-fade, so the button never
+     reflows as the panel opens. */
+  .navbtn svg{
+    grid-area:1/1;width:18.4px;height:18.4px;
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .navbtn .i-x{opacity:0;transform:rotate(-90deg) scale(.5)}
+  .nav-open .navbtn .i-bars{opacity:0;transform:rotate(90deg) scale(.5)}
+  .nav-open .navbtn .i-x{opacity:1;transform:none}
+
+  .topbar-in{flex-wrap:nowrap;gap:11.5px}
+  /* backdrop-filter makes .topbar a containing block for fixed-position
+     descendants, which would anchor the drawer to the bar instead of the
+     viewport and crop it to the bar's height. The bar goes solid here so the
+     panel can position against the viewport. */
+  .topbar{backdrop-filter:none;background:var(--bench)}
+  /* Above the scrim, so the bar stays lit while the panel is open. */
+  .nav-open .topbar{z-index:70}
+  /* The panel is a child of .topbar, so it shares that stacking context and
+     would otherwise paint over its own close button. */
+  .themebtn,.navbtn{position:relative;z-index:80}
+
+  .navscrim{
+    display:block;position:fixed;inset:0;z-index:50;
+    background:rgba(5,9,10,.5);
+    opacity:0;pointer-events:none;transition:opacity .32s ease;
+  }
+  .nav-open .navscrim{opacity:1;pointer-events:auto}
+
+  .nav{
+    position:fixed;top:0;right:0;bottom:0;left:auto;z-index:60;
+    width:min(78vw,300px);
+    flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;
+    align-items:stretch;gap:0;
+    padding:69px 27.6px 27.6px;
+    background:var(--bench-2);border-left:1px solid var(--line);
+    overflow-y:auto;overscroll-behavior:contain;
+    transform:translateX(100%);
+    /* visibility keeps the closed panel out of the tab order and the
+       accessibility tree; it flips back only once the slide-out has run. */
+    visibility:hidden;
+    transition:transform .32s cubic-bezier(.2,.7,.3,1), visibility 0s linear .32s;
+  }
+  .nav-open .nav{
+    transform:none;visibility:visible;
+    transition:transform .32s cubic-bezier(.2,.7,.3,1), visibility 0s;
+  }
+  .nav a{
+    font-size:19.5px;padding:13.8px 2px;
+    border-bottom:1px solid var(--line-2);
+  }
+  .nav-open body{overflow:hidden}
+}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *{animation:none!important;transition:none!important}
