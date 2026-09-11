@@ -94,9 +94,10 @@ img{max-width:100%;display:block}
 
 .mono{
   font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:11px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
+  /* Sized for lowercase: caps carried the old 11px, sentence case needs more. */
+  font-size:13px;
+  /* Set as written. Wide tracking is for caps, so it stays tight here. */
+  letter-spacing:.02em;
   font-weight:500;
 }
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
@@ -118,7 +119,9 @@ img{max-width:100%;display:block}
 .mark{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
 .mark-glyph{
   width:26px;height:26px;border-radius:5px;flex:none;
-  background:linear-gradient(135deg, var(--teal), var(--copper));
+  /* The mark is a fixed brand asset, so it keeps the bright accent pair in
+     both themes rather than following the theme tokens into darker values. */
+  background:linear-gradient(135deg, #4FBEC0, #E08A45);
   display:flex;align-items:center;justify-content:center;
   font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;
   font-size:18px;line-height:1;color:var(--film);
@@ -140,16 +143,35 @@ img{max-width:100%;display:block}
 .nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--copper)}
 .themebtn{
   border:1px solid var(--line);background:transparent;color:var(--ink-2);
-  border-radius:var(--r);height:30px;padding:0 11px;cursor:pointer;
-  font-family:"IBM Plex Mono",monospace;font-size:11px;
-  letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  border-radius:var(--r);width:30px;height:30px;padding:0;cursor:pointer;
+  display:grid;place-items:center;
 }
 .themebtn:hover{color:var(--ink);border-color:var(--ink-3)}
+/* Sun and moon share one grid cell and cross-fade, so the button never
+   reflows. Which one shows must mirror the theme tokens above: the stored
+   choice wins, otherwise the system preference decides. */
+.themebtn svg{
+  grid-area:1/1;width:16px;height:16px;
+  fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.themebtn .i-sun{opacity:1;transform:none}
+.themebtn .i-moon{opacity:0;transform:rotate(90deg) scale(.4)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .themebtn .i-sun{opacity:0;transform:rotate(-90deg) scale(.4)}
+  :root:not([data-theme="light"]) .themebtn .i-moon{opacity:1;transform:none}
+}
+:root[data-theme="dark"] .themebtn .i-sun{opacity:0;transform:rotate(-90deg) scale(.4)}
+:root[data-theme="dark"] .themebtn .i-moon{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ .themebtn svg{transition:none} }
 
 /* ------------------------------------------------------ home hero panel -- */
-.hero{padding:14px 14px 0}
+/* The hero runs full-bleed: no inset, and square corners so the panel meets
+   the viewport edges cleanly rather than showing the page behind its radius. */
+.hero{padding:0}
 .panel{
-  position:relative;background:var(--film);border-radius:var(--r);overflow:hidden;
+  position:relative;background:var(--film);border-radius:0;overflow:hidden;
   min-height:min(80vh,720px);display:flex;flex-direction:column;justify-content:flex-end;
 }
 .panel canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -183,7 +205,11 @@ img{max-width:100%;display:block}
   font-family:"Archivo",sans-serif;font-size:14px;font-weight:600;
   padding:12px 20px;border-radius:var(--r);
 }
-.btn-a{background:var(--copper);color:#120A04}
+/* Pinned rather than tracking --copper: the light theme's darker copper gives
+   the near-black label only 4.29:1, under the 4.5:1 floor. This is the dark
+   theme's warmer value, which reads at 7.37:1 and also sits better on the
+   dark hero. The --copper token is unchanged for text, rules and focus. */
+.btn-a{background:#E08A45;color:#120A04}
 .btn-a:hover{background:#D9752F}
 .btn-b{border:1px solid rgba(231,237,234,.32);color:#DDE6E3}
 .btn-b:hover{border-color:#DDE6E3;background:rgba(231,237,234,.07)}
@@ -212,13 +238,15 @@ section{padding:clamp(56px,8vw,104px) 0}
 .rail h2{font-size:clamp(26px,2.5vw,32px)}
 h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 .section-sub{margin-top:16px;max-width:62ch;color:var(--ink-2);font-size:18px}
+.section-sub a{color:var(--teal)}
 
 /* ------------------------------------------------------------- thesis -- */
 .thesis{border-bottom:1px solid var(--line-2)}
 .statement{font-size:clamp(22px,2.7vw,31px);line-height:1.4;max-width:26ch;letter-spacing:-.015em}
 .thesis .sub{font-size:17.5px;line-height:1.62;color:var(--ink-2);max-width:60ch;margin-top:26px}
+.thesis .sub:first-child{margin-top:0}
 .thesis .sub + .sub{margin-top:20px}
-.thesis-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px)}
+.thesis-cols{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(28px,5vw,56px)}
 
 /* -------------------------------------------------------- instruments -- */
 .instruments{
@@ -268,12 +296,14 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 
 /* ------------------------------------------------------------ projects -- */
 .projects{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
 }
-.proj{background:var(--surface);display:flex;flex-direction:column;transition:background .25s}
+.proj{
+  background:var(--surface);display:flex;flex-direction:column;transition:background .25s;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+}
 .proj:hover{background:var(--bench-2)}
-.proj-img{height:104px;background:var(--film);position:relative;overflow:hidden}
+.proj-img{aspect-ratio:16/9;background:var(--film);position:relative;overflow:hidden}
 .proj-img canvas{width:100%;height:100%;display:block}
 .proj-img img{
   width:100%;height:100%;display:block;object-fit:cover;
@@ -287,7 +317,7 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 .proj h3{font-size:17.5px;font-variation-settings:"wdth" 108;letter-spacing:-.01em;line-height:1.2}
 .proj p{color:var(--ink-2);font-size:16px;flex:1}
 .lead{
-  display:flex;align-items:center;gap:9px;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px;color:var(--ink-3);
   padding-top:12px;border-top:1px solid var(--line-2);
 }
 .lead b{color:var(--ink);font-weight:500;letter-spacing:.04em}
@@ -324,6 +354,11 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 .person{display:flex;flex-direction:column;gap:12px}
 .avatar{aspect-ratio:1;background:var(--film);border-radius:var(--r);overflow:hidden}
 .avatar canvas{width:100%;height:100%;display:block}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar.ph-slot{background:var(--line-2)}
+.avatar .ph{width:100%;height:100%;display:block;color:var(--ink-3);opacity:.5}
+.avatar .ph use{fill:currentColor}
+svg.sprite{position:absolute;width:0;height:0;overflow:hidden}
 .person h3{font-size:16.5px;font-variation-settings:"wdth" 106;letter-spacing:-.005em}
 .person .role{color:var(--ink-3);margin-top:5px}
 .person .links{margin-top:8px;display:flex;gap:12px}
@@ -339,6 +374,9 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 .roster-row h3{font-size:17px;font-variation-settings:"wdth" 106}
 .roster-row p{color:var(--ink-2);font-size:16px}
 .roster-row .aff{color:var(--ink-3);text-align:right}
+.roster-row .links{margin-top:6px;display:flex;gap:12px}
+.roster-row .links a{color:var(--teal);text-decoration:none;font-size:12px}
+.roster-row .links a:hover{text-decoration:underline}
 
 /* ------------------------------------------------------- publications -- */
 .pubyear{
@@ -347,21 +385,18 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 }
 .pubyear h3{font-size:26px;font-variation-settings:"wdth" 118;letter-spacing:-.02em}
 .pubyear span{color:var(--ink-3)}
-.pub{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,180px);gap:24px;
-  padding:20px 0;border-bottom:1px solid var(--line-2);align-items:start;
-}
+.pub{padding:20px 0;border-bottom:1px solid var(--line-2)}
 .pub h4{font-size:17.5px;font-variation-settings:"wdth" 104;line-height:1.32;letter-spacing:-.008em}
 .pub .authors{color:var(--ink-2);font-size:15.5px;margin-top:7px}
 .pub .authors b{color:var(--ink);font-weight:600}
 .pub .venue{color:var(--ink-3);margin-top:7px;font-style:italic;font-size:15.5px}
-.pub .links{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
-.pub .links a{
-  color:var(--teal);text-decoration:none;overflow-wrap:anywhere;
-  /* a DOI is case-sensitive — never let the mono label style upcase it */
-  text-transform:none;letter-spacing:.02em;
+/* The DOI sits inline, just ahead of the venue, rather than in a column of
+   its own. Upright and teal so it reads as the link among the italics. */
+.pub .venue .doi-inline{
+  color:var(--teal);text-decoration:none;font-style:normal;
+  margin-right:12px;
 }
-.pub .links a:hover{color:var(--copper)}
+.pub .venue .doi-inline:hover{color:var(--copper);text-decoration:underline}
 
 /* --------------------------------------------------------------- news -- */
 .newslist{display:flex;flex-direction:column}
@@ -390,14 +425,19 @@ h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.025em}
 .notice .meta b{color:var(--copper);font-weight:500}
 
 /* ---------------------------------------------------------- join panel -- */
+/* The panel follows the theme rather than staying dark: these tokens flip
+   with it, so it reads as a raised surface in light mode and a deep one in
+   dark. btn-b is drawn for a dark ground, so it is restated here to match. */
 .join{
-  background:var(--film);border-radius:var(--r);padding:clamp(36px,6vw,72px);
-  margin:0 14px;color:var(--film-ink);
-  box-shadow:inset 0 0 0 1px rgba(231,237,234,.10);
+  background:var(--bench-2);border-radius:var(--r);padding:clamp(36px,6vw,72px);
+  margin:0 14px;color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);
 }
-.join h2{color:var(--film-ink);font-size:clamp(30px,4.4vw,52px)}
-.join p{color:#B9C7C4;max-width:56ch;margin-top:20px;font-size:18.5px}
+.join h2{color:var(--ink);font-size:clamp(30px,4.4vw,52px)}
+.join p{color:var(--ink-2);max-width:56ch;margin-top:20px;font-size:18.5px}
 .join .cta-row{margin-top:32px}
+.join .btn-b{border:1px solid var(--line);color:var(--ink)}
+.join .btn-b:hover{border-color:var(--ink-3);background:var(--bench)}
 
 /* contact / openings */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
@@ -421,8 +461,8 @@ footer{border-top:1px solid var(--line);background:var(--bench-2);padding:52px 0
   gap:36px;padding-bottom:32px;border-bottom:1px solid var(--line-2);
 }
 .foot-about p{color:var(--ink-2);font-size:16px;margin-top:14px;max-width:44ch}
-.foot-col h4{font-size:12px;color:var(--ink-3);margin-bottom:14px;
-  font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.foot-col h4{font-size:14px;color:var(--ink-3);margin-bottom:14px;
+  font-family:"IBM Plex Mono",monospace;letter-spacing:.02em;font-weight:500}
 .foot-col a{
   display:block;text-decoration:none;color:var(--ink-2);
   font-size:15.5px;padding:5px 0;
@@ -451,8 +491,6 @@ footer{border-top:1px solid var(--line);background:var(--bench-2);padding:52px 0
   .proj-row{grid-template-columns:1fr}
   .roster-row{grid-template-columns:1fr;gap:8px}
   .roster-row .aff{text-align:left}
-  .pub{grid-template-columns:1fr;gap:12px}
-  .pub .links{align-items:flex-start;text-align:left}
   .newsitem{grid-template-columns:1fr;gap:10px}
   .foot-grid{grid-template-columns:1fr;gap:28px}
   .topbar-in{height:auto;flex-wrap:wrap;padding:10px 0;gap:10px 18px}
@@ -460,10 +498,14 @@ footer{border-top:1px solid var(--line);background:var(--bench-2);padding:52px 0
   .nav::-webkit-scrollbar{display:none}
   .nav a{white-space:nowrap}
   .join{margin:0 10px}
-  .hero{padding:10px 10px 0}
   .scrim{background:
     linear-gradient(to top, rgba(5,9,10,.94) 30%, rgba(5,9,10,.55) 70%, rgba(5,9,10,.25) 100%),
     rgba(5,9,10,.30)}
+}
+/* Below ~414px auto-fit cannot place two 168px tracks and collapses to one,
+   giving a full-width portrait per person. Tablets still auto-fit 3 or more. */
+@media (max-width:480px){
+  .people{grid-template-columns:repeat(2,1fr);gap:16px}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}

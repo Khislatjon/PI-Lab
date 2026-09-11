@@ -1,10 +1,9 @@
 # π Lab — Predictive Imaging Lab
 
 Website for the Predictive Imaging Lab (π Lab), School of Engineering, Faculty of
-Engineering and Science, University of Greenwich. Research runs under the
-**Bio-AImagiQ** initiative — Bio-Inspired Engineering with Imaging-based AI and
-Quantum data — which is deliberately open to affiliated researchers outside the
-lab's direct supervision.
+Engineering and Science, University of Greenwich. The lab is deliberately open:
+the π Lab network extends to affiliated researchers outside the lab's direct
+supervision.
 
 **Live:** https://predictiveimaginglab.com
 
@@ -25,9 +24,8 @@ index.html            Home — hero, models, projects, facility, news
 research.html         Research themes and published architectures
 projects.html         Active projects, one row each
 facility.html         Instruments and access
-people.html           Members and Bio-AImagiQ affiliates
+people.html           Members and π Lab network affiliates
 publications.html     Papers (to be generated from BibTeX)
-news.html             News and opportunities
 join.html             Openings and contact
 assets/css/site.css   Design system — all tokens live here
 assets/js/tomo.js     Procedural tomographic slice renderer
@@ -89,11 +87,14 @@ certificate is issued.
 
 ## Before launch
 
-- [ ] Replace the generated specimen placeholders with real micrographs and
-      portraits (`canvas.tile` elements — swap for `<img>`)
-- [ ] Confirm contact details and postal address on `join.html`
-- [ ] Confirm roles and titles on `people.html`; add affiliate list
-- [ ] Fill in the full publication history with real author lists
-- [ ] Add the lab's Google Scholar profile link on `publications.html`
-- [ ] Consider moving to a generator (Astro or Eleventy) so news and
-      publications come from Markdown and BibTeX rather than hand-edited HTML
+- [ ] Replace the generated specimen placeholders with real micrographs
+      (`canvas.tile` elements — swap for `<img>`)
+- [ ] Add portraits for the remaining people (`assets/img/people/`; drop the
+      `ph-slot` class and swap the `<svg class="ph">` for an `<img>`)
+- [x] Confirm contact details and postal address on `join.html`
+- [x] Confirm roles and titles on `people.html`; add affiliate list
+- [x] Link the Google Scholar profile on `publications.html`
+- [ ] Replace the Scholar link with a generated list once the group's BibTeX
+      file exists
+- [ ] Consider moving to a generator (Astro or Eleventy) so publications come
+      from BibTeX rather than hand-edited HTML
