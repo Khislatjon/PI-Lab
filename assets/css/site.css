@@ -493,9 +493,13 @@ footer{border-top:1px solid var(--line);background:var(--bench-2);padding:59.8px
   .roster-row .aff{text-align:left}
   .newsitem{grid-template-columns:1fr;gap:11.5px}
   .foot-grid{grid-template-columns:1fr;gap:32.2px}
-  .topbar-in{height:auto;flex-wrap:wrap;padding:11.5px 0;gap:11.5px 20.7px}
-  .nav{width:100%;order:3;gap:18.4px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
-  .nav::-webkit-scrollbar{display:none}
+  /* The vertical padding is the only thing this needs to add; keeping the
+     shorthand's horizontal value at the .wrap gutter stops the bar from
+     running to the screen edges. */
+  .topbar-in{height:auto;flex-wrap:wrap;padding:11.5px 32.2px;gap:11.5px 20.7px}
+  /* Too many links for one row on a phone, so they wrap and centre rather
+     than sliding off the edge in a scroller nothing signals is scrollable. */
+  .nav{width:100%;order:3;flex-wrap:wrap;justify-content:center;gap:9.2px 18.4px}
   .nav a{white-space:nowrap}
   .join{margin:0 11.5px}
   .scrim{background:
