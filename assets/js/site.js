@@ -50,7 +50,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '-40px 0px -60px' });
+    }, { rootMargin: '-46px 0px -69px' });
     nodes.forEach(function(n){ io.observe(n); });
   } else {
     nodes.forEach(function(n){ n.classList.add('in'); });
