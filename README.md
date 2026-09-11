@@ -1,9 +1,7 @@
 # π Lab — Predictive Imaging Lab
 
 Website for the Predictive Imaging Lab (π Lab), School of Engineering, Faculty of
-Engineering and Science, University of Greenwich. The lab is deliberately open:
-the π Lab network extends to affiliated researchers outside the lab's direct
-supervision.
+Engineering and Science, University of Greenwich.
 
 **Live:** https://predictiveimaginglab.com
 
@@ -20,23 +18,23 @@ Then open http://localhost:8000.
 ## Structure
 
 ```
-index.html            Home — hero, models, projects, facility, news
-research.html         Research themes and published architectures
-projects.html         Active projects, one row each
+index.html            Home
+research.html         Research themes
+projects.html         Active projects
 facility.html         Instruments and access
 people.html           Members and π Lab network affiliates
-publications.html     Papers (to be generated from BibTeX)
+publications.html     Publications
 join.html             Openings and contact
 assets/css/site.css   Design system — all tokens live here
-assets/js/tomo.js     Procedural tomographic slice renderer
+assets/js/tomo.js     Procedural tomographic slice renderer (hero illustration)
 assets/js/site.js     Theme toggle, scroll reveals, canvas bootstrap
-CNAME                 Custom domain for GitHub Pages
 ```
 
 ## Design system
 
 Named **"Bench & Detector"**: the page ground is a cool lab bench, and imaging
-surfaces are deep detector panels inset into it.
+surfaces are deep detector panels inset into it. Tokens are defined at the top of
+`assets/css/site.css`.
 
 | Token | Light | Role |
 | --- | --- | --- |
@@ -55,46 +53,12 @@ map, so the brand gradient doubles as a legitimate scientific colormap.
 Light and dark themes are both defined at token level and follow the visitor's
 system preference; the Theme button overrides and persists to `localStorage`.
 
-### The hero canvas
-
-`assets/js/tomo.js` renders a tomographic slice procedurally. Structure comes
-from a narrow band around a level set of 3D fractal value noise — trabecular
-bone is irregular rather than a lattice, so this reads far closer to a real
-specimen than a periodic surface would. A sweeping divider turns raw XCT
-greyscale into a D2IM-style predicted strain field.
-
-Slices build in row chunks across frames so a rebuild never drops a frame, and
-the first slice renders synchronously so the panel is never empty on first
-paint. Honours `prefers-reduced-motion`.
+The hero panel is a procedural illustration rather than measured data:
+`assets/js/tomo.js` renders a tomographic-style slice from 3D fractal noise, with
+a sweeping divider between greyscale and a predicted-strain colormap. It honours
+`prefers-reduced-motion`.
 
 ## Deployment
 
-GitHub Pages serves from the default branch. `CNAME` points at
-`predictiveimaginglab.com`; `.nojekyll` stops Jekyll from touching the assets.
-
-DNS records to add at the registrar:
-
-| Type | Name | Value |
-| --- | --- | --- |
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `khislatjon.github.io` |
-
-Then enable **Enforce HTTPS** in the repository's Pages settings once the
-certificate is issued.
-
-## Before launch
-
-- [ ] Replace the generated specimen placeholders with real micrographs
-      (`canvas.tile` elements — swap for `<img>`)
-- [ ] Add portraits for the remaining people (`assets/img/people/`; drop the
-      `ph-slot` class and swap the `<svg class="ph">` for an `<img>`)
-- [x] Confirm contact details and postal address on `join.html`
-- [x] Confirm roles and titles on `people.html`; add affiliate list
-- [x] Link the Google Scholar profile on `publications.html`
-- [ ] Replace the Scholar link with a generated list once the group's BibTeX
-      file exists
-- [ ] Consider moving to a generator (Astro or Eleventy) so publications come
-      from BibTeX rather than hand-edited HTML
+GitHub Pages serves from `main`, so pushing to `main` publishes. `CNAME` sets the
+custom domain and `.nojekyll` stops Jekyll from touching the assets.
