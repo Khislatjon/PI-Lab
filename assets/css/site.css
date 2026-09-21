@@ -117,19 +117,9 @@ img{max-width:100%;display:block}
 }
 .topbar-in{display:flex;align-items:center;gap:32.2px;height:var(--nav-h)}
 .mark{display:flex;align-items:center;gap:12.6px;text-decoration:none;margin-right:auto}
-.mark-glyph{
-  width:29.9px;height:29.9px;border-radius:5.8px;flex:none;
-  /* The mark is a fixed brand asset, so it keeps the bright accent pair in
-     both themes rather than following the theme tokens into darker values. */
-  background:linear-gradient(135deg, #4FBEC0, #E08A45);
-  display:flex;align-items:center;justify-content:center;
-  font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;
-  font-size:20.7px;line-height:1;color:var(--film);
-  padding-bottom:2px;
-}
 .mark-name{
   font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 112;
-  font-weight:700;font-size:18.4px;letter-spacing:-.01em;
+  font-weight:700;font-size:23px;letter-spacing:-.01em;
 }
 .mark-name span{color:var(--teal)}
 .nav{display:flex;gap:25.3px}
