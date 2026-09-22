@@ -376,7 +376,7 @@ svg.sprite{position:absolute;width:0;height:0;overflow:hidden}
 .pubyear h3{font-size:29.9px;font-variation-settings:"wdth" 118;letter-spacing:-.02em}
 .pubyear span{color:var(--ink-3)}
 .pub{padding:23px 0;border-bottom:1px solid var(--line-2)}
-.pub h4{font-size:20.1px;font-variation-settings:"wdth" 104;line-height:1.32;letter-spacing:-.008em}
+.pub h4{font-size:20.1px;font-variation-settings:"wdth" 104;line-height:1.32;letter-spacing:-.008em;text-wrap:pretty}
 .pub .authors{color:var(--ink-2);font-size:17.8px;margin-top:8px}
 .pub .authors b{color:var(--ink);font-weight:600}
 .pub .venue{color:var(--ink-3);margin-top:8px;font-style:italic;font-size:17.8px}
